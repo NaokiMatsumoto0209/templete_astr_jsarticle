@@ -10,7 +10,6 @@
   - test.pdf
 - thesis.bib
 - plistings.sty
-- jecon.bst
 - README.md
 - fig_tab_temp.tex
 
@@ -19,8 +18,6 @@
 ### thesis.bib
 
 ### plistings.sty
-
-### jecon.bst
 
 ### fig_tab_temp.tex
 
