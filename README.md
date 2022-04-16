@@ -17,6 +17,12 @@
 ### main.tex, main.pdf, fig
 
 ### thesis.bib, jecon.bst
+TeXの引用、参考文献の表示にはBiBTeXを使います。
+
+引用のスタイルは様々あるのですが、ここではShiroTakedaさんが作られた、「jecon.bst」というスタイルを使わせて頂きます。
+
+https://github.com/ShiroTakeda/jecon-bst
+
 
 ### plistings.sty
 
