@@ -1,0 +1,125 @@
+\RequirePackage{plautopatch}
+\documentclass[a4paper,papersize,uplatex,dvipdfmx,10pt]{jsarticle}
+%\documentclass[a4paper,papersize,uplatex,dvipdfmx,10pt,twocollumn]{jsarticle} % 二段組にするならこちら
+
+%package類
+%%%%%%%%%%%%%%%%%%%%
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[prefernoncjk]{pxcjkcat}
+\usepackage[scaled=1.05,helvratio=0.95]{newtxtext}
+\usepackage[dvipdfmx]{color}
+
+\usepackage[colorlinks=true,allcolors=blue]{hyperref}
+%\usepackage[dvipdfmx,hidelinks]{hyperref} % 紙に印刷するときは青文字リンクは消す。
+
+\usepackage{pxjahyper} % 文字化け防止
+\usepackage{array,amsmath,amssymb,bm,cases} % 数式でよく使うもの
+\usepackage[dvipdfmx]{graphicx} % 画像使用
+\usepackage{url} % \url{} の間にurlを挟む
+
+\usepackage{natbib}
+%\usepackage[numbers]{natbib}
+%bibliographystyleを「jplain」にした時、エラーが出るならこちらを試す
+
+\usepackage{ascmac} % itembox環境やscreen環境などの枠関係の環境
+
+\usepackage{enumerate} % enumerate環境
+
+\usepackage[nottoc,notlot,notlof]{tocbibind} % bibliography を目次に追加
+
+%\usepackage{mathtools}%dcases環境 % 普段あまり使わないからコメントアウト
+
+\usepackage[nooneline]{subfigure}
+\subfiguretopcaptrue % subfigure環境で使う
+
+%\usepackage{comment}
+% ソースの中に説明書きするときに使う
+% この環境下のものはコンパイルされない
+
+\allowdisplaybreaks[4] % 数式がページをまたぐのを許す
+
+\usepackage{listings,jvlisting} %日本語のコメントアウトをする場合jvlisting（もしくはjlisting）が必要
+%ここからソースコードの表示に関する設定
+\lstset{
+  basicstyle={\ttfamily},
+  identifierstyle={\small},
+  commentstyle={\smallitshape},
+  keywordstyle={\small\bfseries},
+  ndkeywordstyle={\small},
+  stringstyle={\small\ttfamily},
+  frame={tb},
+  breaklines=true,
+  columns=[l]{fullflexible},
+  numbers=left,
+  xrightmargin=0zw,
+  xleftmargin=3zw,
+  numberstyle={\scriptsize},
+  stepnumber=1,
+  numbersep=1zw,
+  lineskip=-0.5ex
+}
+%ここまでソースコードの表示に関する設定
+
+%newcommand類
+%%%%%%%%%%%%%%%%%%%%
+\newcommand{\bs}{\symbol{92}} %backslash
+\newcommand{\red}[1]{\textcolor{red}{#1}} %文字色赤
+\newcommand{\blue}[1]{\textcolor{blue}{#1}} %文字色青
+\newcommand{\green}[1]{\textcolor{green}{#1}} %文字色緑
+\newcommand{\ured}[1]{\textcolor{red}{\underline{\textcolor{black}{#1}}}} %下線赤
+\newcommand{\ugreen}[1]{\textcolor{green}{\underline{\textcolor{black}{#1}}}} %下線緑
+\newcommand{\ublue}[1]{\textcolor{blue}{\underline{\textcolor{black}{#1}}}} %下線青
+%%%%%%%%%%%%%%%%%%%%
+
+\title{タイトル名}
+%\title{\vspace{-3cm}タイトル名} % タイトル上のスペースを減らしたい場合はこっち
+
+\author{東北大学宇宙地球物理学科天文学コース\\B9SB0000\,\,天文太郎}
+\date{\today}
+
+\begin{document}
+\maketitle
+\nocite{*}
+% 文書内で引用していないものを、参考文献に載せる場合に\nocite{}を使う。
+% 例えば、cite keyを「hogehoge」にしている文献を引用していなくても参考文献に載せるなら
+% \nocite{hogehoge}
+% とする。
+% ここではワイルドカード「*」を使っているので、.bibに載せている文献は何もかも参考文献として表示させる。
+
+\section{はじめに} %
+\LaTeX を使う人が増えそうなので、簡単に説明を付属させたテンプレートを作りました。これをたたき台にして、適当に弄りこんにゃくして下さい。\par
+一応、参考になるように\texttt{main.tex}内には、コメントアウトなどで説明を踏まえつつ色々とコマンドを使っているので、\texttt{main.pdf}と一緒に見比べてコマンドの効果を確認しながら、使えそうだなってのは使ってください。コード全体に関して僕が著作権を主張するようなものは存在しないので、勝手に使って大丈夫だと思います。ただし、\textbf{著作権を主張できるようなものがない}ということは、\textbf{著作権を主張してはいけない}ものだとも思うので、「このコードは私が考えました!!」と主張するのは無駄かもしれません。だって今更、「\texttt{\bs section}コマンドは私が作りました!」とか言っても、多くの人が一般的に使ってるのですから、冷たい目で見られるだけでしょう。当然、これまでもこれからも、1番初めに\texttt{\bs section}コマンドを作った人の成果物を私たちが有り難く使わせてもらっているだけだと思います。一方で、\texttt{\bs renewcommand}などを使って\texttt{\bs section}コマンドをオリジナルに作り直した、という場合は著作権が発生しているはずです。そこら辺は\LaTeX のポリシー的なのを確認して下さい。\par
+あと、何かしら不具合があればGitHubにissue\footnote{\url{https://github.com/NaokiMatsumoto0209/templete_astr_jsarticle/issues}}を立ててもらえれば助かります。issues機能を使った経験がないので、その練習にしたいです。
+
+\section{文章について} %
+文章の書き方という言葉には2種類ほどあると思いますが、「わかりやすい文章の書き方」は僕も勉強中なので、別な本とかを参照して下さい\footnote{文章が\textbf{書けない}という人はそもそも\LaTeX を使わないでしょう。}。\par
+ちなみに、コード中に先ほどから出現している\texttt{\bs par}は改段落するコマンドです。1行空けて書くことでも改段落できますが、コードが長くなるので\footnote{気のせい}僕は使わなくなりました。\par
+
+\subsection{数式表現} %%
+\LaTeX を使う1番の目的は数式を書くためだと思います。数式を書くときには数式環境を使うはずです。いくつか簡単に説明します。
+
+\subsubsection{文中の数式} %%%
+文中で数式を使う場合は\texttt{\$}を使います。実際に見せた方が早いので、実際に使ってみます。
+
+\begin{screen}
+  無偏光の場合のThomson散乱について考える。無偏光波は2つの互いに独立な直線偏光波の重ね合わせとみなせる。ここで、$\bm{\epsilon}_{1}$を入射方向と散乱方向$\bm{n}$を含む平面内にとり、$\bm{\epsilon}_{2}$をこの平面に垂直にとる。$\Theta$を$\bm{\epsilon}_{1}$と$\bm{n}$の間の角、$\theta = \Theta - \pi/2$とする。すると、$\theta$は入射波と散乱波の間の角となる。
+\end{screen}
+
+例えば、上の文中では$\theta = \Theta - \pi/2$は\texttt{\$ \bs theta = \bs Theta - \bs pi/2 \$}と書いています。このように\texttt{\$}で数式表現を挟むことで、文中で数式を使うことができます。
+
+\subsubsection{文外の数式} %%%
+
+
+\subsection{画像} %%
+
+\subsection{表} %%
+
+\subsection{コード} %%
+
+\section{終わりに} %
+
+\renewcommand{\bibname}{参考文献}
+\bibliographystyle{jecon}
+\bibliography{thesis}
+\end{document}
