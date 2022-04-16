@@ -9,13 +9,14 @@
   - test.jpg
   - test.pdf
 - thesis.bib
+- jecon.bst
 - plistings.sty
 - README.md
 - fig_tab_temp.tex
 
 ### main.tex, main.pdf, fig
 
-### thesis.bib
+### thesis.bib, jecon.bst
 
 ### plistings.sty
 
