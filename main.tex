@@ -18,8 +18,8 @@
 \usepackage[dvipdfmx]{graphicx} % 画像使用
 \usepackage{url} % \url{} の間にurlを挟む
 
-\usepackage{natbib}
-%\usepackage[numbers]{natbib}
+%\usepackage{natbib}
+\usepackage[numbers]{natbib}
 %bibliographystyleを「jplain」にした時、エラーが出るならこちらを試す
 
 \usepackage{ascmac} % itembox環境やscreen環境などの枠関係の環境
@@ -91,8 +91,8 @@
 
 \section{はじめに} %
 \LaTeX を使う人が増えそうなので、簡単に説明を付属させたテンプレートを作りました。これをたたき台にして、適当に弄りこんにゃくして下さい。\par
-一応、参考になるように\texttt{main.tex}内には、コメントアウトなどで説明を踏まえつつ色々とコマンドを使っているので、\texttt{main.pdf}と一緒に見比べてコマンドの効果を確認しながら、使えそうだなってのは使ってください。コード全体に関して僕が著作権を主張するようなものは存在しないので、勝手に使って大丈夫だと思います。ただし、\textbf{著作権を主張できるようなものがない}ということは、\textbf{著作権を主張してはいけない}ものだとも思うので、「このコードは私が考えました!!」と主張するのは無駄かもしれません。だって今更、「\texttt{\bs section}コマンドは私が作りました!」とか言っても、多くの人が一般的に使ってるのですから、冷たい目で見られるだけでしょう。当然、これまでもこれからも、1番初めに\texttt{\bs section}コマンドを作った人の成果物である\texttt{\bs section}コマンドを私たちが有り難く使わせてもらっているだけだと思います。一方で、\texttt{\bs renewcommand}などを使って\texttt{\bs section}コマンドをオリジナルに作り直した、という場合は著作権が発生しているはずです。そこら辺は\LaTeX のポリシー的なのを確認して下さい。\par
-あと、何かしら不具合があればGitHubにissue\footnote{\url{https://github.com/NaokiMatsumoto0209/templete_astr_jsarticle/issues}}を立ててもらえれば助かります。issues機能を使った経験がないので、その練習にしたいです。
+一応、参考になるように\texttt{main.tex}内には、コメントアウトなどで説明を踏まえつつ色々とコマンドを使っているので、\texttt{main.pdf}と一緒に見比べてコマンドの効果を確認しながら、使えそうだなってのは使ってください。コード全体に関して僕が著作権を主張するようなものは存在しないので、特別に表記しているもの以外については、勝手に使って大丈夫だと思います。\par
+何かしら不具合があればGitHubにissue\footnote{\url{https://github.com/NaokiMatsumoto0209/templete_astr_jsarticle/issues}}を立ててもらえれば助かります。issues機能を使った経験がないので、その練習にしたいです。
 
 \section{文章について} %
 文章の書き方という言葉には2種類ほどあると思いますが、「わかりやすい文章の書き方」は僕も勉強中なので、別な本とかを参照して下さい\footnote{文章が\textbf{書けない}という人はそもそも\LaTeX を使わないでしょう。}。\par
@@ -108,20 +108,55 @@
   無偏光の場合のThomson散乱について考える。無偏光波は2つの互いに独立な直線偏光波の重ね合わせとみなせる。ここで、$\bm{\epsilon}_{1}$を入射方向と散乱方向$\bm{n}$を含む平面内にとり、$\bm{\epsilon}_{2}$をこの平面に垂直にとる。$\Theta$を$\bm{\epsilon}_{1}$と$\bm{n}$の間の角、$\theta = \Theta - \pi/2$とする。すると、$\theta$は入射波と散乱波の間の角となる。
 \end{screen}
 
-例えば、上の文中では$\theta = \Theta - \pi/2$は\texttt{\$ \bs theta = \bs Theta - \bs pi/2 \$}と書いています。このように\texttt{\$}で数式表現を挟むことで、文中で数式を使うことができます。
+例えば、上の文中では$\theta = \Theta - \pi/2$は\texttt{\$ \bs theta = \bs Theta - \bs pi/2 \$}と書いています。このように\texttt{\$...\$}で数式表現を挟むことで、文中で数式を使うことができます。\par
+ちなみに、分数を\texttt{\bs frac}を使わずに書いている理由は、$\frac{1}{2}$という形がダサいように感じられるからです。$1/2$と書いた方が良いように思います。まあここら辺は人の好みかもしれないですけど。
 
 \subsubsection{文外の数式} %%%
+文外で数式を使う場合は僕は一貫して\texttt{align}環境しか使っていないですが、\texttt{equation}環境や\texttt{\$\$...\$\$}で挟む方法などもあります。僕が\texttt{align}環境しか使わないのは、改行もできるし、改行しなくてもいいし、数式番号も楽に消せるしで、他をわざわざ選ぶ理由が無いように感じられるからです。実際に使ってみます。
 
+\begin{screen}
+  無偏光の場合の微分散乱断面積は2つの直線偏光波の微分散乱断面積の平均と捉えることができる。
+  \begin{align}
+    \left( \frac{\mathrm{d}\sigma}{\mathrm{d}\Omega} \right)_{\mathrm{unpolarized}} &=
+    \frac{1}{2}\left[ \left( \frac{\mathrm{d}\sigma(\Theta)}{\mathrm{d}\Omega} \right)_{\mathrm{polarized}} + \left( \frac{\mathrm{d}\sigma(\frac{\pi}{2})}{\mathrm{d}\Omega} \right)_{\mathrm{polarized}} \right]\notag\\
+    &= \frac{1}{2}r_{0}^{2}\left( 1+\sin^{2}\Theta \right)\notag\\
+    &= \frac{1}{2}r_{0}^{2}\left( 1+\cos^{2}\theta \right)
+  \end{align}
+  これが無偏光波が入射方向に対して角度$\theta$の方向に散乱される場合の微分散乱断面積で、\textbf{トムソンの公式}と呼ばれる。
+  \begin{itembox}[l]{Thomson formula}
+    \begin{align*}
+      \left( \frac{\mathrm{d}\sigma}{\mathrm{d}\Omega} \right)_{\mathrm{unpolarized}} = \frac{1}{2}r_{0}^{2}\left( 1+\cos^{2}\theta \right)
+    \end{align*}
+  \end{itembox}
+  \begin{itemize}
+    \item トムソンの公式は$\theta$に対して対称であるから、前方に散乱される場合と後方に散乱される場合で対称となる。
+    \item 散乱断面積$\sigma_{\mathrm{T}}$は直線偏光の場合と同様に全立体角積分すればよい:
+    \begin{align}
+      \sigma_{\mathrm{T}} &= \frac{1}{2}r_{0}^{2} \int^{2\pi}_{0}\mathrm{d}\phi \int^{\pi}_{0}\mathrm{d}\theta\, \left( 1+\cos^{2}\theta \right) \sin\theta\notag\\
+      &= \frac{8}{3}\pi r_{0}^{2}\label{eq:sanran_unpol}
+    \end{align}
+  \end{itemize}
+\end{screen}
 
 \subsection{画像} %%
+ここからは、画像や表、コードの挿入の方法について説明します。一応、いつも利用しているテンプレートは同梱の\texttt{fig\_tab\_temp.tex}にあるので、使って下さい。
 
 \subsection{表} %%
 
 \subsection{コード} %%
 
+\subsection{参考文献の表示の仕方}
+参考文献を表示するために、\BibTeX を使っています。\par
+活動銀河核は面白い!!!!\cite{1130000796831041920}として引用したりします。日本人の名前が「天文太郎」ではなく「太郎天文」の順になってしまっています。この場合、\texttt{\bs bibliographystyle\{jplain\}}の\texttt{\{ \}}の内部を\texttt{\{jecon\}}に変更し、\texttt{\bs usepackage[numbers]\{natbib\}}から\texttt{[numbers]}のオプションを消します。これは、ShiroTakedaさんが作られた\texttt{jecon.bst}という引用スタイルを利用するものです\footnote{\url{https://github.com/ShiroTakeda/jecon-bst}}。すると、
+\begin{screen}
+  活動銀河核は面白い!!!!\blue{Peterson 他}(\blue{2010})
+\end{screen}
+となります。どちらが良いかは好みで決めて下さい。
+
 \section{終わりに} %
 
 \renewcommand{\bibname}{参考文献}
-\bibliographystyle{jecon}
+%\bibliographystyle{jecon}
+\bibliographystyle{jplain}
 \bibliography{thesis}
 \end{document}
