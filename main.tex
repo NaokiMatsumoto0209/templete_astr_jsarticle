@@ -141,24 +141,24 @@
 
 \subsection{画像} %%
 ここからは、画像や表、コードの挿入の方法について説明します。一応、いつも利用しているテンプレートは同梱の\texttt{fig\_tab\_temp.tex}にあるので、使って下さい。\par
-画像の挿入方法ですが、\texttt{figure}環境を使います。実際に画像を挿入してみると図~\ref{fig:bh}となります。
+画像の挿入方法ですが、\texttt{figure}環境を使います。実際に画像を挿入してみると図~\ref{fig:co_vs_ci}となります。
 \begin{figure}
   \centering % centering環境は、ページの中央に対象を置くようにする命令です。
   \includegraphics[width=0.5\linewidth]{./fig/test.pdf}
   %[]で囲んだ部分は画像の大きさを指定します。
-  \caption[ブラックホールの降着円盤と、そこに束縛された物体]{ブラックホールの降着円盤と、そこに束縛された物体。線分AB内で物体は運動する。}
+  \caption[Circinus銀河の中心部での輝線強度比]{Circinus銀河の$\mathrm{CO}(3-2)$と$[\mathrm{C}\mathrm{I}]$の中心部での輝線強度比}
   %[]のオプションは画像リストを利用する際のキャプションになるもので、画像自体のキャプションにはなりません。
   %jsarticleでは画像リストを使わなければならないような大規模な文章にはなりにくいと思いますが、個人的なお作法として入れているだけです。
   %ちなみに、画像リストは「\listoffigures」を「\maketitle」の下あたりに書くだけです。
-  \label{fig:bh}
+  \label{fig:co_vs_ci}
 \end{figure}
 コードとしては
 \begin{verbatim}
   \begin{figure}
     \centering
     \includegraphics[width=0.5\linewidth]{fig/test.pdf}
-    \caption[ブラックホールの降着円盤と、そこに束縛された物体]{ブラックホールの降着円盤と、そこに束縛された物体。線分AB内で物体は運動する。}
-    \label{fig:bh}
+    \caption[Circinus銀河の中心部での輝線強度比]{Circinus銀河の$\mathrm{CO}(3-2)$と$[\mathrm{C}\mathrm{I}]$の中心部での輝線強度比}
+    \label{fig:co_vs_ci}
   \end{figure}
 \end{verbatim}
 となっています。挿入される位置はデフォルトではページの上部になるはずです。ここが今までWordを使ってきた方にとって混乱するポイントの1つだと個人的に思っていて、\LaTeX{}ではあまり画像位置の指定をしません\footnote{私個人の大変短い経験によるものであり、例えば論文などのフォーマットでそのような指定がなされる可能性があります。その場合は適宜、状況にあった画像挿入の方法、位置指定の方法を調べてください。}。どうしても"ここ"に挿入したいという場合は、\texttt{\bs begin\{figure\}[h]}と指定します。\texttt{h}は「here」の意味です。\texttt{b}はページの下になったりと、4種類くらい指定方法があり優先順位があります。しかし、滅多に使ってないのでここでは詳細に説明しません。今回は\texttt{test.pdf}を挿入しましたが、その他の画像形式も挿入することができます。ここでは\texttt{subfigure}環境を使用してそれぞれの画像形式を並べてみます。左から\texttt{.pdf}、\texttt{.png}、\texttt{.jpg}です。
@@ -166,19 +166,20 @@
   \centering
   \subfigure[]{%
   \includegraphics[width=.3\textwidth,clip]{./fig/test.pdf}%
-  \label{fig:bh_pdf}%
+  \label{fig:co_vs_ci_pdf}%
   }%
   \subfigure[]{%
   \includegraphics[width=.3\textwidth,clip]{./fig/test.png}%
-  \label{fig:bh_png}%
+  \label{fig:co_vs_ci_png}%
   }%
   \subfigure[]{%
   \includegraphics[width=.3\textwidth,clip]{./fig/test.jpg}%
-  \label{fig:bh_jpg}%
+  \label{fig:co_vs_ci_jpg}%
   }
   \caption[\texttt{subfigure}環境による画像挿入]{\texttt{subfigure}環境による画像挿入。(a)pdf形式、(b)png形式、(c)jpg形式}
-  \label{fig:bh_sb}
+  \label{fig:co_vs_ci_sb}
 \end{figure}
+別に意地悪して解像度を落としている訳ではないのですが、\texttt{.pdf}が解像度が良いのに比べて他2つは解像度が悪くなっています。\texttt{png}や\texttt{jpg}の仕組み上仕方ないことなのですが、\texttt{pdf}の方がファイルも軽いですし、特段の事情がない限りは\texttt{pdf}を使った方が良いと思います。
 
 \subsection{表} %%
 
