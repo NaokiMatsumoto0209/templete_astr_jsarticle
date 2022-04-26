@@ -144,7 +144,7 @@
 画像の挿入方法ですが、\texttt{figure}環境を使います。実際に画像を挿入してみると図~\ref{fig:bh}となります。
 \begin{figure}
   \centering % centering環境は、ページの中央に対象を置くようにする命令です。
-  \includegraphics[width=0.5\linewidth]{fig/test.pdf}
+  \includegraphics[width=0.5\linewidth]{./fig/test.pdf}
   %[]で囲んだ部分は画像の大きさを指定します。
   \caption[ブラックホールの降着円盤と、そこに束縛された物体]{ブラックホールの降着円盤と、そこに束縛された物体。線分AB内で物体は運動する。}
   %[]のオプションは画像リストを利用する際のキャプションになるもので、画像自体のキャプションにはなりません。
@@ -165,15 +165,15 @@
 \begin{figure}
   \centering
   \subfigure[]{%
-  \includegraphics[width=.3\textwidth,clip]{fig/test.pdf}%
+  \includegraphics[width=.3\textwidth,clip]{./fig/test.pdf}%
   \label{fig:bh_pdf}%
   }%
   \subfigure[]{%
-  \includegraphics[width=.3\textwidth,clip]{fig/test.png}%
+  \includegraphics[width=.3\textwidth,clip]{./fig/test.png}%
   \label{fig:bh_png}%
   }%
   \subfigure[]{%
-  \includegraphics[width=.3\textwidth,clip]{fig/test.jpg}%
+  \includegraphics[width=.3\textwidth,clip]{./fig/test.jpg}%
   \label{fig:bh_jpg}%
   }
   \caption[\texttt{subfigure}環境による画像挿入]{\texttt{subfigure}環境による画像挿入。(a)pdf形式、(b)png形式、(c)jpg形式}

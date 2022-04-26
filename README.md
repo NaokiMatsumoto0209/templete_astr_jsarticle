@@ -5,9 +5,9 @@
 - main.tex
 - main.pdf
 - fig
+  - test.pdf
   - test.png
   - test.jpg
-  - test.pdf
 - thesis.bib
 - jecon.bst
 - plistings.sty
