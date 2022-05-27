@@ -1,0 +1,98 @@
+\RequirePackage{plautopatch}
+\documentclass[a4paper,papersize,uplatex,dvipdfmx,10pt]{jsarticle}
+%\documentclass[a4paper,papersize,uplatex,dvipdfmx,10pt,twocollumn]{jsarticle} % 二段組にするならこちら
+
+%package類
+%%%%%%%%%%%%%%%%%%%%
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[prefernoncjk]{pxcjkcat}
+\usepackage[scaled=1.05,helvratio=0.95]{newtxtext}
+\usepackage[dvipdfmx]{color}
+
+\usepackage[colorlinks=true,allcolors=blue]{hyperref}
+%\usepackage[dvipdfmx,hidelinks]{hyperref} % 紙に印刷するときは青文字リンクは消す。
+
+\usepackage{pxjahyper} % 文字化け防止
+\usepackage{array,amsmath,amssymb,bm,cases} % 数式でよく使うもの
+\usepackage[dvipdfmx]{graphicx} % 画像使用
+\usepackage{url} % \url{} の間にurlを挟む
+
+%\usepackage{natbib}
+\usepackage[numbers]{natbib} % bibliographystyleを「jplain」にした時、エラーが出るならこちらを試す
+
+\usepackage{ascmac} % itembox環境やscreen環境などの枠関係の環境
+
+\usepackage{enumerate} % enumerate環境
+
+\usepackage[nottoc,notlot,notlof]{tocbibind} % bibliography を目次に追加
+
+%\usepackage{mathtools} % dcases環境 % 普段あまり使わないからコメントアウト
+
+\usepackage[nooneline]{subfigure}
+\subfiguretopcaptrue % subfigure環境で使う
+
+%\usepackage{comment}
+% ソースの中に説明書きするときに使う
+% この環境下のものはコンパイルされない
+
+\allowdisplaybreaks[4] % 数式がページをまたぐのを許す
+
+\usepackage{listings,jvlisting} %日本語のコメントアウトをする場合jvlisting（もしくはjlisting）が必要
+%ここからソースコードの表示に関する設定
+\lstset{
+  basicstyle={\ttfamily},
+  identifierstyle={\small},
+  commentstyle={\smallitshape},
+  keywordstyle={\small\bfseries},
+  ndkeywordstyle={\small},
+  stringstyle={\small\ttfamily},
+  frame={tb},
+  breaklines=true,
+  columns=[l]{fullflexible},
+  numbers=left,
+  xrightmargin=0zw,
+  xleftmargin=3zw,
+  numberstyle={\scriptsize},
+  stepnumber=1,
+  numbersep=1zw,
+  lineskip=-0.5ex
+}
+%ここまでソースコードの表示に関する設定
+% https://qiita.com/ta_b0_/items/2619d5927492edbb5b03
+% を使わせて頂いています。
+
+%newcommand類
+%%%%%%%%%%%%%%%%%%%%
+\newcommand{\bs}{\symbol{92}} %backslash
+\newcommand{\red}[1]{\textcolor{red}{#1}} %文字色赤
+\newcommand{\blue}[1]{\textcolor{blue}{#1}} %文字色青
+\newcommand{\green}[1]{\textcolor{green}{#1}} %文字色緑
+\newcommand{\ured}[1]{\textcolor{red}{\underline{\textcolor{black}{#1}}}} %下線赤
+\newcommand{\ugreen}[1]{\textcolor{green}{\underline{\textcolor{black}{#1}}}} %下線緑
+\newcommand{\ublue}[1]{\textcolor{blue}{\underline{\textcolor{black}{#1}}}} %下線青
+%%%%%%%%%%%%%%%%%%%%
+
+\title{タイトル名}
+%\title{\vspace{-3cm}タイトル名} % タイトル上のスペースを減らしたい場合はこっち
+
+\author{東北大学宇宙地球物理学科天文学コース\\B9SB0000\,\,天文太郎}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\nocite{*}
+% 文書内で引用していないものを、参考文献に載せる場合に\nocite{}を使う。
+% 例えば、cite keyを「hogehoge」にしている文献を引用していなくても参考文献に載せるなら
+% \nocite{hogehoge}
+% とする。
+% ここではワイルドカード「*」を使っているので、.bibに載せている文献は何もかも参考文献として表示させる。
+
+
+
+\renewcommand{\bibname}{参考文献}
+%\bibliographystyle{jecon}
+\bibliographystyle{jplain}
+\bibliography{thesis}
+\end{document}
