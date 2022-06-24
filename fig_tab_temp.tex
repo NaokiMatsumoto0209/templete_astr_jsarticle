@@ -3,7 +3,8 @@
 \begin{figure}
 	\centering
 	\includegraphics[width=0.5\linewidth]{fig/title.pdf}
-	\caption[title]{title \label{label}}
+	\caption[title]{title}
+	\label{label}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%
 
@@ -46,12 +47,65 @@
 \end{table}
 %%%%%%%%%%%%%%%%%%%%
 
+%コードの挿入
 %%%%%%%%%%%%%%%%%%%%
 \begin{lstlisting}[caption = hogehoge,label = code_1_1_1]
-matsumotonaoki@matcha-mac ~ % gcc --version
-gcc-11 (Homebrew GCC 11.2.0_3) 11.2.0
-Copyright (C) 2021 Free Software Foundation, Inc.
-This is free software; see the source for copying conditions.  There is NO
-warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+import numpy as np
+import matplotlib.pyplot as plt
+
+e = np.arange(1.0, 10**(5.0), 1.0)
+m = 511.0
+x = e/m
+
+s = 3.0/4.0*( (1.0+x)*x**(-3.0)*( 2.0*x*(1.0+x)*(1.0+2.0*x)**(-1) \
+    - np.log(1.0+2.0*x) ) + np.log(1.0 + 2.0*x)/(2.0*x) - (1.0+3.0*x)*(1.0+2.0*x)**(-2.0) )
+
+f1 = 1.0 - 2.0*x + 26.0/5.0*x**(2.0)
+f2 = 3.0/(8.0*x) * ( np.log(2.0*x) + 0.5 )
+
+plt.figure(figsize=(7,7))
+plt.plot(e, s, label='cross section')
+plt.plot(e, f1, label='Approximate: $x \ll 1$')
+plt.plot(e, f2, label='Approximate: $x \gg 1$')
+plt.title('The cross-section for Compton scattering')
+plt.xlabel('$E_{\gamma}\,[\mathrm{keV}]$')
+plt.ylabel('$\\sigma_{\mathrm{KN}}/\\sigma_{\mathrm{T}}$')
+plt.xscale('log')
+plt.ylim(0.0,1.0)
+plt.xlim(1.0,10**(5.0))
+plt.rcParams['font.size'] = 12
+plt.legend(bbox_to_anchor=(1, 1), loc='upper right', borderaxespad=0)
+plt.savefig('fig_compton_sc.pdf')
+plt.close('all')
+
+plt.figure(figsize=(7,7))
+plt.plot(e, s, label='cross section')
+plt.plot(e, f1, label='Approximate: $x \ll 1$')
+plt.plot(e, f2, label='Approximate: $x \gg 1$')
+plt.title('The cross-section for Compton scattering')
+plt.xlabel('$E_{\gamma}\,[\mathrm{keV}]$')
+plt.ylabel('$\\sigma_{\mathrm{KN}}/\\sigma_{\mathrm{T}}$')
+plt.xscale('log')
+plt.ylim(0.0,1.0)
+plt.xlim(1.0,10**(5.0))
+plt.rcParams['font.size'] = 12
+plt.legend(bbox_to_anchor=(1, 1), loc='upper right', borderaxespad=0)
+plt.savefig('fig_compton_sc.png')
+plt.close('all')
+
+plt.figure(figsize=(7,7))
+plt.plot(e, s, label='cross section')
+plt.plot(e, f1, label='Approximate: $x \ll 1$')
+plt.plot(e, f2, label='Approximate: $x \gg 1$')
+plt.title('The cross-section for Compton scattering')
+plt.xlabel('$E_{\gamma}\,[\mathrm{keV}]$')
+plt.ylabel('$\\sigma_{\mathrm{KN}}/\\sigma_{\mathrm{T}}$')
+plt.xscale('log')
+plt.ylim(0.0,1.0)
+plt.xlim(1.0,10**(5.0))
+plt.rcParams['font.size'] = 12
+plt.legend(bbox_to_anchor=(1, 1), loc='upper right', borderaxespad=0)
+plt.savefig('fig_compton_sc.jpg')
+plt.close('all')
 \end{lstlisting}
 %%%%%%%%%%%%%%%%%%%%
