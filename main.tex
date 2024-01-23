@@ -1,6 +1,6 @@
 \RequirePackage{plautopatch}
 \documentclass[a4paper,papersize,uplatex,dvipdfmx,10pt]{jsarticle}
-%\documentclass[a4paper,papersize,uplatex,dvipdfmx,10pt,twocollumn]{jsarticle} % 二段組にするならこちら
+%\documentclass[a4paper,papersize,uplatex,dvipdfmx,12pt,twocolumn]{jsarticle} % 二段組にするならこちら
 
 %package類
 %%%%%%%%%%%%%%%%%%%%
@@ -9,6 +9,7 @@
 \usepackage[prefernoncjk]{pxcjkcat}
 \usepackage[scaled=1.05,helvratio=0.95]{newtxtext}
 \usepackage[dvipdfmx]{color}
+\usepackage[dvipsnames]{xcolor}
 
 \usepackage[colorlinks=true,allcolors=blue]{hyperref}
 %\usepackage[dvipdfmx,hidelinks]{hyperref} % 紙に印刷するときは青文字リンクは消す。
@@ -18,8 +19,8 @@
 \usepackage[dvipdfmx]{graphicx} % 画像使用
 \usepackage{url} % \url{} の間にurlを挟む
 
-%\usepackage{natbib}
-\usepackage[numbers]{natbib} % bibliographystyleを「jplain」にした時、エラーが出るならこちらを試す
+\usepackage{natbib}
+%\usepackage[numbers]{natbib} % bibliographystyleを「jplain」にした時、エラーが出るならこちらを試す
 
 \usepackage{ascmac} % itembox環境やscreen環境などの枠関係の環境
 
@@ -28,6 +29,9 @@
 \usepackage[nottoc,notlot,notlof]{tocbibind} % bibliography を目次に追加
 
 %\usepackage{mathtools} % dcases環境 % 普段あまり使わないからコメントアウト
+
+\usepackage{tcolorbox}
+\usepackage{ulem}
 
 \usepackage[nooneline]{subfigure}
 \subfiguretopcaptrue % subfigure環境で使う
@@ -68,15 +72,17 @@
 \newcommand{\red}[1]{\textcolor{red}{#1}} %文字色赤
 \newcommand{\blue}[1]{\textcolor{blue}{#1}} %文字色青
 \newcommand{\green}[1]{\textcolor{green}{#1}} %文字色緑
+\newcommand{\rb}[1]{\textcolor{RoyalBlue}{#1}}
+\newcommand{\ro}[1]{\textcolor{RedOrange}{#1}}
 \newcommand{\ured}[1]{\textcolor{red}{\underline{\textcolor{black}{#1}}}} %下線赤
 \newcommand{\ugreen}[1]{\textcolor{green}{\underline{\textcolor{black}{#1}}}} %下線緑
 \newcommand{\ublue}[1]{\textcolor{blue}{\underline{\textcolor{black}{#1}}}} %下線青
 %%%%%%%%%%%%%%%%%%%%
 
-\title{タイトル名}
-%\title{\vspace{-3cm}タイトル名} % タイトル上のスペースを減らしたい場合はこっち
+%\title{\LaTeX{}を用いた文書作成}
+\title{\vspace{-3cm}\LaTeX{}を用いた文書作成} % タイトル上のスペースを減らしたい場合はこっち
 
-\author{東北大学宇宙地球物理学科天文学コース\\B9SB0000\,\,天文太郎}
+\author{東北大学大学院天文学専攻修士1年\\C3SM3000\,\,天文太郎}
 \date{\today}
 
 \begin{document}
@@ -90,31 +96,32 @@
 % ここではワイルドカード「*」を使っているので、.bibに載せている文献は何もかも参考文献として表示させる。
 
 \section{はじめに} %
-\LaTeX を使う人が増えそうなので、簡単に説明を付属させたテンプレートを作りました。これをたたき台にして、適当に弄りこんにゃくして下さい。\par
+\LaTeX{}を使う人が増えそうなので、簡単に説明を付属させたテンプレートを作りました。これをたたき台にして、適当に弄りこんにゃくして下さい。\par
 一応、参考になるように\texttt{main.tex}内には、コメントアウトなどで説明を踏まえつつ色々とコマンドを使っているので、\texttt{main.pdf}と一緒に見比べてコマンドの効果を確認しながら、使えそうだなってのは使ってください。コード全体に関して僕自身が著作権を主張するようなものは存在しないので、特別に表記しているもの以外については、勝手に使って大丈夫だと思います。\par
-何かしら不具合があればGitHubにissue\footnote{\url{https://github.com/NaokiMatsumoto0209/templete_astr_jsarticle/issues}}を立ててもらえれば助かります。issues機能を使った経験がないので、その練習にしたいです。
+何かしら不具合があればGitHubにIssue\footnote{\url{https://github.com/NaokiMatsumoto0209/templete_astr_jsarticle/issues}}を立ててもらえれば助かります。issues機能を使った経験がないので、その練習にしたいです。
 
 \section{文章について} %
-文章の書き方という言葉には2種類ほどあると思いますが、「わかりやすい文章の書き方」は僕も勉強中なので、別な本とかを参照して下さい\footnote{文章が\textbf{書けない}という人はそもそも\LaTeX を使わないでしょう。}。\par
+文章の書き方という言葉には2種類ほどあると思いますが、「わかりやすい文章の書き方」は僕も勉強中なので、別な本とかを参照して下さい\footnote{文章が\textbf{書けない}という人はそもそも\LaTeX{}を使わないでしょう。}。\par
 ちなみに、コード中に先ほどから出現している\texttt{\bs par}は改段落するコマンドです。1行空けて書くことでも改段落できますが、コードが長くなるので\footnote{気のせい}僕は使わなくなりました。\par
+\LaTeX{}を使用する理由の最も基本的なものは、数式を使用することだと思います。まず数式表現についてから説明を始めます。
 
 \subsection{数式表現} %%
-\LaTeX を使う1番の目的は数式を書くためだと思います。数式を書くときには数式環境を使うはずです。いくつか簡単に説明します。
+数式を書くときには数式環境を使います。そもそもの数式のコマンドはここでは詳細に触れませんが、調べるとかなりの数のブログ等でまとめられているので、すぐにわかると思います。便利なものは覚えてしまいましょう。最近のWordやPower point系のソフトでは\LaTeX{}ベースの数式文字が用意されていますが、基本的にはそれとコマンドは同じです。。これらの数式はCamblia Mathみたいなフォントで書かれていることが多いですが、\LaTeX{}純正の数式は異なるフォントで表示されます。\LaTeX{}を好む人はこのフォントの違いを気にしている場合が多いようです。
+では、数式環境について、いくつか簡単に説明します。
 
 \subsubsection{文中の数式} %%%
 文中で数式を使う場合は\texttt{\$}を使います。実際に見せた方が早いので、実際に使ってみます。
 
-\begin{screen}
+\begin{tcolorbox}[title=文中の数式表現の例]
   無偏光の場合のThomson散乱について考える。無偏光波は2つの互いに独立な直線偏光波の重ね合わせとみなせる。ここで、$\bm{\epsilon}_{1}$を入射方向と散乱方向$\bm{n}$を含む平面内にとり、$\bm{\epsilon}_{2}$をこの平面に垂直にとる。$\Theta$を$\bm{\epsilon}_{1}$と$\bm{n}$の間の角、$\theta = \Theta - \pi/2$とする。すると、$\theta$は入射波と散乱波の間の角となる。
-\end{screen}
+\end{tcolorbox}
 
-例えば、上の文中では$\theta = \Theta - \pi/2$は\texttt{\$ \bs theta = \bs Theta - \bs pi/2 \$}と書いています。このように\texttt{\$...\$}で数式表現を挟むことで、文中で数式を使うことができます。\par
-ちなみに、分数を\texttt{\bs frac}を使わずに書いている理由は、$\frac{1}{2}$という形がダサいように感じられるからです。$1/2$と書いた方が良いように思います。まあここら辺は人の好みかもしれないですけど。
+例えば、上の文中では$\theta = \Theta - \pi/2$は\texttt{\$ \bs theta = \bs Theta - \bs pi/2 \$}と書いています。このように\texttt{\$...\$}で数式表現を挟むことで、文中で数式を使うことができます。ちなみに、分数を\texttt{\bs frac}を使わずに書いている理由は、$\frac{1}{2}$という形がダサいように感じられるからです。$1/2$と書いた方が良いように思います。まあここら辺は人の好みかもしれないですけど。
 
 \subsubsection{文外の数式} %%%
-文外で数式を使う場合は僕は一貫して\texttt{align}環境しか使っていないですが、\texttt{equation}環境や\texttt{\$\$...\$\$}で挟む方法などもあります。僕が\texttt{align}環境しか使わないのは、改行もできるし、改行しなくてもいいし、数式番号も楽に消せるしで、他をわざわざ選ぶ理由が無いように感じられるからです。実際に使ってみます。
+文外で数式を使う場合には様々な方法が存在します。ここでは\texttt{align}環境と\texttt{equation}環境を紹介します。実際に使ってみます。
 
-\begin{screen}
+\begin{tcolorbox}[title=数式を用いた文章構成の例]
   無偏光の場合の微分散乱断面積は2つの直線偏光波の微分散乱断面積の平均と捉えることができる:
   \begin{align}
     \left( \frac{\mathrm{d}\sigma}{\mathrm{d}\Omega} \right)_{\mathrm{unpolarized}} &=
@@ -123,11 +130,11 @@
     &= \frac{1}{2}r_{0}^{2}\left( 1+\cos^{2}\theta \right).
   \end{align}
   これが無偏光波が入射方向に対して角度$\theta$の方向に散乱される場合の微分散乱断面積で、\textbf{トムソンの公式}と呼ばれる。ここで、$r_{0}$は直線偏光の場合と同様に古典電子半径を表している。
-  \begin{itembox}[l]{Thomson formula}
-    \begin{align*}
+  \begin{tcolorbox}[title=Thomson formula]
+    \begin{equation*}
       \left( \frac{\mathrm{d}\sigma}{\mathrm{d}\Omega} \right)_{\mathrm{unpolarized}} = \frac{1}{2}r_{0}^{2}\left( 1+\cos^{2}\theta \right)
-    \end{align*}
-  \end{itembox}
+    \end{equation*}
+  \end{tcolorbox}
   \begin{itemize}
     \item トムソンの公式は$\theta$に対して対称であるから、前方に散乱される場合と後方に散乱される場合で対称となる。
     \item 散乱断面積$\sigma_{\mathrm{T}}$は直線偏光の場合と同様に全立体角積分すればよい:
@@ -136,15 +143,29 @@
       &= \frac{8}{3}\pi r_{0}^{2}.\label{eq:sanran_unpol}
     \end{align}
   \end{itemize}
-\end{screen}
+\end{tcolorbox}
+
+\texttt{equation}と\texttt{align}はどちらも同様の働きをしますが、\texttt{equation}は1行であるのに対し、\texttt{align}は複数行の数式で使用します。もちろん\texttt{align}でも1行で止めることはできますが、次のように微妙に余白が大きくなってしまうみたいです。
+\begin{itembox}[l]{\texttt{equation}環境}
+  \begin{equation*}
+    \cos^{2}{\theta} + \sin^{2}{\theta} = 1
+  \end{equation*}
+\end{itembox}
+\begin{itembox}[l]{\texttt{align}環境}
+  \begin{align*}
+    \cos^{2}{\theta} + \sin^{2}{\theta} = 1
+  \end{align*}
+\end{itembox}
+1行の数式の場合は\texttt{equation}を使う方が見栄えは良いと思います。
+
 
 \subsection{画像} %%
 ここからは、画像や表、コードの挿入の方法について説明します。一応、いつも利用しているテンプレートは同梱の\texttt{fig\_tab\_temp.tex}にあるので、使って下さい。\par
 画像の挿入方法ですが、\texttt{figure}環境を使います。実際に画像を挿入してみると図~\ref{fig:co_vs_ci}となります。
 \begin{figure}
   \centering % centering環境は、ページの中央に対象を置くようにする命令です。
-  \includegraphics[width=0.5\linewidth]{./fig/fig_compton_sc.pdf}
-  %[]で囲んだ部分は画像の大きさを指定します。
+  \includegraphics[width=0.95\linewidth]{./fig/fig_compton_sc.pdf}
+  %[]で囲んだ部分は画像の大きさを指定します。ここを指定しない場合に境界を設定できないーー的なエラーが出る可能性があります。
   \caption[Compton散乱の散乱断面積の入射光子のエネルギーへの依存性]{Compton散乱の散乱断面積の入射光子のエネルギーへの依存性}
   %[]のオプションは画像リストを利用する際のキャプションになるもので、画像自体のキャプションにはなりません。
   %jsarticleでは画像リストを使わなければならないような大規模な文章にはなりにくいと思いますが、個人的なお作法として入れているだけです。
@@ -152,27 +173,27 @@
   \label{fig:co_vs_ci}
 \end{figure}
 コードとしては
-\begin{verbatim}
+\begin{lstlisting}[caption = 画像の挿入方法,label = code:how_to_insert_figs]
   \begin{figure}
     \centering
-    \includegraphics[width=0.5\linewidth]{./fig/fig_compton_sc.pdf}
+    \includegraphics[width=0.95\linewidth]{./fig/fig_compton_sc.pdf}
     \caption[Compton散乱の散乱断面積の入射光子のエネルギーへの依存性]{Compton散乱の散乱断面積の入射光子のエネルギーへの依存性}
     \label{fig:compton_sc}
   \end{figure}
-\end{verbatim}
+\end{lstlisting}
 となっています。挿入される位置はデフォルトではページの上部になるはずです。ここが今までWordを使ってきた方にとって混乱するポイントの1つだと個人的に思っていて、\LaTeX{}ではあまり画像位置の指定をしません\footnote{私個人の大変短い経験によるものであり、例えば論文などのフォーマットでそのような指定がなされる可能性があります。その場合は適宜、状況にあった画像挿入の方法、位置指定の方法を調べてください。}。どうしても"ここ"に挿入したいという場合は、\texttt{\bs begin\{figure\}[h]}と指定します。\texttt{h}は「here」の意味です。\texttt{b}はページの下になったりと、4種類くらい指定方法があり優先順位があります。しかし、滅多に使ってないのでここでは詳細に説明しません。今回は\texttt{fig\_compton\_sc.pdf}を挿入しましたが、その他の画像形式も挿入することができます。ここでは\texttt{subfigure}環境を使用してそれぞれの画像形式を並べてみます。左から\texttt{.pdf}、\texttt{.png}、\texttt{.jpg}です。
 \begin{figure}
   \centering
   \subfigure[]{%
-  \includegraphics[width=.3\textwidth,clip]{./fig/fig_compton_sc.pdf}%
+  \includegraphics[width=.3333\textwidth,clip]{./fig/fig_compton_sc.pdf}%
   \label{fig:compton_sc_pdf}%
   }%
   \subfigure[]{%
-  \includegraphics[width=.3\textwidth,clip]{./fig/fig_compton_sc.png}%
+  \includegraphics[width=.3333\textwidth,clip]{./fig/fig_compton_sc.png}%
   \label{fig:compton_sc_png}%
   }%
   \subfigure[]{%
-  \includegraphics[width=.3\textwidth,clip]{./fig/fig_compton_sc.jpg}%
+  \includegraphics[width=.3333\textwidth,clip]{./fig/fig_compton_sc.jpg}%
   \label{fig:compton_sc_jpg}%
   }
   \caption[\texttt{subfigure}環境による画像挿入]{\texttt{subfigure}環境による画像挿入。(a)pdf形式、(b)png形式、(c)jpg形式}
@@ -181,12 +202,35 @@
 別に意地悪して解像度を落としている訳ではないのですが、\texttt{.pdf}が解像度が良いのに比べて他2つは解像度が悪くなっています。\texttt{png}や\texttt{jpg}の仕組み上仕方ないことなのですが、\texttt{pdf}の方がファイルも軽いですし、特段の事情がない限りは\texttt{pdf}を使った方が良いと思います。
 
 \subsection{表} %%
+ここでは表の挿入方法を説明します。表は\texttt{table}環境と\texttt{tablar}環境で扱われます。
+\begin{table}[b]
+  \centering
+  \caption{IAU2009天文数学系の一部}
+  \footnotesize
+  \label{table:constants}
+  \begin{tabular}{lcrrr}
+      \hline
+      \shortstack{定数名} &
+      \shortstack{記号} &
+      \shortstack{数値} &
+      \shortstack{不定性} &
+      \shortstack{単位}\\
+      \hline
+      光速 & $\mathrm{c}$ & $2.99792458\times10^{8}$ & $\mathrm{const}$ & $\mathrm{m}\,\mathrm{s}^{-1}$ \\
+      重力定数 & $\mathrm{G}$ & $6.67428\times10^{-11}$ & $6.7\times10^{-15}$ & $\mathrm{m}^{3}\,\mathrm{kg}^{-1}\,\mathrm{s}^{-2}$ \\
+      天文単位 & $\mathrm{AU}$ & $1.49597870700\times10^{11}$ & $3.0$ & $\mathrm{m}$ \\
+      地球の赤道半径 & $a_{\mathrm{E}}$ & $6.3781366\times10^{6}$ & $1\times10^{-1}$ & $\mathrm{m}$\\
+      \hline
+  \end{tabular}
+  \normalsize
+\end{table}
+表~\ref{table:constants}からわかるように、表の中でも同様に数式を使うことができます。
 
 \subsection{コード} %%
 
 \subsection{参考文献の表示の仕方}
 参考文献を表示するために、\BibTeX を使っています。\par
-活動銀河核は面白い!!!!\cite{1130000796831041920}として引用したりします。日本人の名前が「天文太郎」ではなく「太郎天文」の順になってしまっています。この場合、\texttt{\bs bibliographystyle\{jplain\}}の\texttt{\{ \}}の内部を\texttt{\{jecon\}}に変更し、\texttt{\bs usepackage[numbers]\{natbib\}}から\texttt{[numbers]}のオプションを消します。これは、ShiroTakedaさんが作られた\texttt{jecon.bst}という引用スタイルを利用するものです\footnote{\url{https://github.com/ShiroTakeda/jecon-bst}}。すると、
+活動銀河核は面白い!!!!\citep{1130000796831041920}として引用したりします。日本人の名前が「天文太郎」ではなく「太郎天文」の順になってしまっています。この場合、\texttt{\bs bibliographystyle\{jplain\}}の\texttt{\{ \}}の内部を\texttt{\{jecon\}}に変更し、\texttt{\bs usepackage[numbers]\{natbib\}}から\texttt{[numbers]}のオプションを消します。これは、ShiroTakedaさんが作られた\texttt{jecon.bst}という引用スタイルを利用するものです\footnote{\url{https://github.com/ShiroTakeda/jecon-bst}}。すると、
 \begin{screen}
   活動銀河核は面白い!!!!\blue{Peterson 他}(\blue{2010})
 \end{screen}
@@ -195,7 +239,7 @@
 \section{終わりに} %
 
 \renewcommand{\bibname}{参考文献}
-%\bibliographystyle{jecon}
-\bibliographystyle{jplain}
+\bibliographystyle{jecon_edited}
+%\bibliographystyle{jplain}
 \bibliography{library}
 \end{document}

@@ -52,10 +52,43 @@
 \begin{lstlisting}[caption = hogehoge,label = code_1_1_1]
 import numpy as np
 import matplotlib.pyplot as plt
+from astropy import constants as asc
 
-e = np.arange(1.0, 10**(5.0), 1.0)
-m = 511.0
-x = e/m
+plt.rcParams['font.family'] = 'Times New Roman' 
+plt.rcParams['mathtext.fontset'] = 'stix' 
+plt.rcParams["font.size"] = 25
+plt.rcParams['xtick.direction'] = 'in' 
+plt.rcParams['ytick.direction'] = 'in' 
+plt.rcParams['axes.grid'] = True
+plt.rcParams['grid.color'] = 'gray'
+plt.rcParams['grid.alpha'] = 0.5
+plt.rcParams['grid.linestyle'] = 'dashed'
+plt.rcParams['axes.grid.axis'] = 'both'
+plt.rcParams['axes.grid.which'] = 'major'
+plt.rcParams['ytick.minor.visible'] = 'True'
+plt.rcParams['ytick.left'] = 'True'
+plt.rcParams['ytick.right'] = 'True'
+plt.rcParams['xtick.minor.visible'] = 'True'
+plt.rcParams['xtick.bottom'] = 'True'
+plt.rcParams['xtick.top'] = 'True'
+plt.rcParams['axes.linewidth'] = 1.5
+plt.rcParams["legend.handlelength"] = 1.0
+plt.rcParams["legend.markerscale"] = 1.0
+plt.rcParams["legend.fancybox"] = False # 丸角
+plt.rcParams["legend.framealpha"] = 1 # 透明度の指定、0で塗りつぶしなし
+plt.rcParams["figure.subplot.left"] = 0.14  # 余白
+plt.rcParams["figure.subplot.bottom"] = 0.14# 余白
+plt.rcParams["figure.subplot.right"] =0.90  # 余白
+plt.rcParams["figure.subplot.top"] = 0.91   # 余白
+plt.rcParams["figure.subplot.wspace"] = 0.20# 図が複数枚ある時の左右との余白
+plt.rcParams["figure.subplot.hspace"] = 0.20# 図が複数枚ある時の上下との余白
+plt.rcParams['savefig.dpi'] = 500
+plt.rcParams['savefig.bbox'] = 'tight'
+plt.rcParams['savefig.pad_inches'] = 0.05
+
+e = np.arange(1.0, 10**(5.0), 1.0) # energy [keV]
+m = asc.m_e.cgs*(asc.c.cgs)**2.0 # electron mass [MeV]
+x = e/m.to('keV').value
 
 s = 3.0/4.0*( (1.0+x)*x**(-3.0)*( 2.0*x*(1.0+x)*(1.0+2.0*x)**(-1) \
     - np.log(1.0+2.0*x) ) + np.log(1.0 + 2.0*x)/(2.0*x) - (1.0+3.0*x)*(1.0+2.0*x)**(-2.0) )
@@ -63,49 +96,23 @@ s = 3.0/4.0*( (1.0+x)*x**(-3.0)*( 2.0*x*(1.0+x)*(1.0+2.0*x)**(-1) \
 f1 = 1.0 - 2.0*x + 26.0/5.0*x**(2.0)
 f2 = 3.0/(8.0*x) * ( np.log(2.0*x) + 0.5 )
 
-plt.figure(figsize=(7,7))
-plt.plot(e, s, label='cross section')
-plt.plot(e, f1, label='Approximate: $x \ll 1$')
-plt.plot(e, f2, label='Approximate: $x \gg 1$')
-plt.title('The cross-section for Compton scattering')
-plt.xlabel('$E_{\gamma}\,[\mathrm{keV}]$')
-plt.ylabel('$\\sigma_{\mathrm{KN}}/\\sigma_{\mathrm{T}}$')
+plt.figure(figsize=(12,8))
+plt.title('The cross-section for Compton scattering',fontsize=25)
+plt.xlabel('$\mathrm{E}_{\mathrm{\gamma}}\,[\mathrm{keV}]$')
+plt.ylabel('$\mathrm{\\sigma}_{\mathrm{KN}}/\mathrm{\\sigma}_{\mathrm{T}}$')
+
+plt.plot(e, s, lw=2.0, label='Cross section')
+plt.plot(e, f1, lw=2.0, ls='dashed', label='Approximate: $x \ll 1$')
+plt.plot(e, f2, lw=2.0, ls='dotted', label='Approximate: $x \gg 1$')
+
 plt.xscale('log')
 plt.ylim(0.0,1.0)
 plt.xlim(1.0,10**(5.0))
-plt.rcParams['font.size'] = 12
-plt.legend(bbox_to_anchor=(1, 1), loc='upper right', borderaxespad=0)
+plt.legend(loc='upper right')
 plt.savefig('fig_compton_sc.pdf')
-plt.close('all')
-
-plt.figure(figsize=(7,7))
-plt.plot(e, s, label='cross section')
-plt.plot(e, f1, label='Approximate: $x \ll 1$')
-plt.plot(e, f2, label='Approximate: $x \gg 1$')
-plt.title('The cross-section for Compton scattering')
-plt.xlabel('$E_{\gamma}\,[\mathrm{keV}]$')
-plt.ylabel('$\\sigma_{\mathrm{KN}}/\\sigma_{\mathrm{T}}$')
-plt.xscale('log')
-plt.ylim(0.0,1.0)
-plt.xlim(1.0,10**(5.0))
-plt.rcParams['font.size'] = 12
-plt.legend(bbox_to_anchor=(1, 1), loc='upper right', borderaxespad=0)
 plt.savefig('fig_compton_sc.png')
-plt.close('all')
-
-plt.figure(figsize=(7,7))
-plt.plot(e, s, label='cross section')
-plt.plot(e, f1, label='Approximate: $x \ll 1$')
-plt.plot(e, f2, label='Approximate: $x \gg 1$')
-plt.title('The cross-section for Compton scattering')
-plt.xlabel('$E_{\gamma}\,[\mathrm{keV}]$')
-plt.ylabel('$\\sigma_{\mathrm{KN}}/\\sigma_{\mathrm{T}}$')
-plt.xscale('log')
-plt.ylim(0.0,1.0)
-plt.xlim(1.0,10**(5.0))
-plt.rcParams['font.size'] = 12
-plt.legend(bbox_to_anchor=(1, 1), loc='upper right', borderaxespad=0)
 plt.savefig('fig_compton_sc.jpg')
+plt.show()
 plt.close('all')
 \end{lstlisting}
 %%%%%%%%%%%%%%%%%%%%
